@@ -140,7 +140,10 @@ class Headset(object):
                     # Multi-byte EEG and Raw Wave codes not included
                     # Raw Value added due to Mindset Communications Protocol
                     if code == RAW_VALUE:
-                        raw=ord(value[0])*256+ord(value[1])
+                        try:
+                            raw=ord(value[0])*256+ord(value[1])
+                        except IndexError:
+                            pass
                         if (raw>=32768):
                             raw=raw-65536
                         self.headset.raw_value = raw
