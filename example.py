@@ -2,6 +2,7 @@ import mindwave,time
 
 port="COM4"
 mid="1425"
+rate=0.001953125
 
 headset = mindwave.Headset(port,mid)
 
@@ -17,3 +18,4 @@ print "Connected."
 
 While True:
 	print headset.raw_value
+	time.sleep(rate)
