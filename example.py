@@ -18,5 +18,10 @@ print("Connected.")
 
 
 while True:
-	print(headset.raw_value)
-	time.sleep(rate)
+	try:
+		while True:
+			print(headset.raw_value)
+			time.sleep(rate)
+	except KeyboardInterrupt:
+			print("K")
+			continue
