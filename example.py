@@ -1,7 +1,7 @@
 import mindwave,time
 import os
 
-port="COM4"
+port="/dev/null"
 mid="1425"
 rate=0.001953125
 namafile="hasilnya.csv"
@@ -25,19 +25,19 @@ f=open(namafile,'a+')
 
 while True:
     if os.path.exists(runfile)!=True:
-                f.close()
-                break
-	try:
-		while True:
-			f.write(headset.raw_value+',0\n')
-			time.sleep(rate)
+        f.close()
+        break
+    try:
+        while True:
+            f.write(headset.raw_value+',0\n')
+            time.sleep(rate)
             if os.path.exists(runfile)!=True:
                 f.close()
                 break
-	except KeyboardInterrupt:
-			f.write(headset.raw_value+',1\n')
-            if os.path.exists(runfile)!=True:
-                f.close()
-                break
-			continue
+    except KeyboardInterrupt:
+        f.write(headset.raw_value+',1\n')
+        if os.path.exists(runfile)!=True:
+            f.close()
+            break
+        continue
 	
