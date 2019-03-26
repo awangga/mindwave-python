@@ -1,8 +1,13 @@
 import mindwave,time
+import os
 
 port="COM4"
 mid="1425"
 rate=0.001953125
+namafile="hasilnya.csv"
+runfile="run"
+
+open(runfile, 'a').close()
 
 headset = mindwave.Headset(port,mid)
 
@@ -16,12 +21,23 @@ while headset.status != "connected":
 		print("Retrying connect...")
 print("Connected.")
 
+f=open(namafile,'a+')
 
 while True:
+    if os.path.exists(runfile):
+                f.close()
+                break
 	try:
 		while True:
-			print(headset.raw_value)
+			f.write(headset.raw_value+',0\n')
 			time.sleep(rate)
+            if os.path.exists(runfile):
+                f.close()
+                break
 	except KeyboardInterrupt:
-			print("K")
+			f.write(headset.raw_value+',1\n')
+            if os.path.exists(runfile):
+                f.close()
+                break
 			continue
+	
