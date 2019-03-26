@@ -24,19 +24,19 @@ print("Connected.")
 f=open(namafile,'a+')
 
 while True:
-    if os.path.exists(runfile):
+    if os.path.exists(runfile)!=True:
                 f.close()
                 break
 	try:
 		while True:
 			f.write(headset.raw_value+',0\n')
 			time.sleep(rate)
-            if os.path.exists(runfile):
+            if os.path.exists(runfile)!=True:
                 f.close()
                 break
 	except KeyboardInterrupt:
 			f.write(headset.raw_value+',1\n')
-            if os.path.exists(runfile):
+            if os.path.exists(runfile)!=True:
                 f.close()
                 break
 			continue
