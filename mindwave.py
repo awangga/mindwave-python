@@ -1,21 +1,21 @@
 import select, serial, threading
 
 # Byte codes
-CONNECT              = '\xc0'
-DISCONNECT           = '\xc1'
-AUTOCONNECT          = '\xc2'
-SYNC                 = '\xaa'
-EXCODE               = '\x55'
-POOR_SIGNAL          = '\x02'
-ATTENTION            = '\x04'
-MEDITATION           = '\x05'
-BLINK                = '\x16'
-HEADSET_CONNECTED    = '\xd0'
-HEADSET_NOT_FOUND    = '\xd1'
-HEADSET_DISCONNECTED = '\xd2'
-REQUEST_DENIED       = '\xd3'
-STANDBY_SCAN         = '\xd4'
-RAW_VALUE            = '\x80'
+CONNECT              = b'\xc0'
+DISCONNECT           = b'\xc1'
+AUTOCONNECT          = b'\xc2'
+SYNC                 = b'\xaa'
+EXCODE               = b'\x55'
+POOR_SIGNAL          = b'\x02'
+ATTENTION            = b'\x04'
+MEDITATION           = b'\x05'
+BLINK                = b'\x16'
+HEADSET_CONNECTED    = b'\xd0'
+HEADSET_NOT_FOUND    = b'\xd1'
+HEADSET_DISCONNECTED = b'\xd2'
+REQUEST_DENIED       = b'\xd3'
+STANDBY_SCAN         = b'\xd4'
+RAW_VALUE            = b'\x80'
 
 # Status codes
 STATUS_CONNECTED     = 'connected'
@@ -242,7 +242,7 @@ class Headset(object):
             if not headset_id:
                 self.autoconnect()
                 return
-        self.dongle.write(''.join([CONNECT, headset_id.decode('hex')]))
+        self.dongle.write(b''.join([CONNECT, bytes.fromhex(headset_id)]))
 
     def autoconnect(self):
         """Automatically connect device to headset."""
